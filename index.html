@@ -6,30 +6,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Objetivos de Desarrollo Sostenible</title>
-  <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/tooltipster.bundle.min.css" />
-  <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css"
-  />
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,800,300,600italic,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
-  <link rel="stylesheet" href="css/fakeLoader.css">
-  <link rel="stylesheet" href="css/home.css">
+
   <!-- Load c3.css -->
   <link href="lib/c3.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" type="text/css" href="css/section-scroll.css">
   <link rel="stylesheet" type="text/css" href="lib/bigfoot/bigfoot-number.css">
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="lib/iealert.min.js" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="lib/iealert/style.css" />
-  <script type="text/javascript" src="lib/fakeLoader.min.js"></script>
-  <script type="text/javascript" src="tooltipster/dist/js/tooltipster.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-  <script src='image.js'></script>
 
-  <script src='config.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
   <script src='funcionesApi.js'></script>
   <span id="loader">
     <p style="color:#333; padding-top: 100px; ">Cargando<br>información</p>
@@ -602,16 +594,18 @@ border-bottom-right-radius: 15px;
     var anioo;
     var numero = getRandomInt(0,9);
     var res = numero % 2;
-    console.log('-------------------random --------------');
-    console.log(res);
-    console.log(numero);
+    
     if(res == 0){
       estados = getIndicadorSer(27,89);
       atributos = getAtributos(27);
       
+      console.log(estados);
+      console.log(atributos);
     }else{
       estados = getIndicadorSer(26,793);
       atributos = getAtributos(26);
+      console.log(estados);
+      console.log(atributos);
     }
   
     function getRandomInt(min, max) {
@@ -717,7 +711,6 @@ border-bottom-right-radius: 15px;
 
   <script>
                             function gen(props) {
-                              console.log("0000001111111111",props);
                               var chart = c3.generate({
                                 bindto: '.info',
                                 padding: {
@@ -820,10 +813,8 @@ border-bottom-right-radius: 15px;
 
 
     function busqueda_estado(cadena) {
-      console.log("super log",cadena,estados);
       for (var i = 0; i < estados.length; i++) {
         if (estados[i][0] == cadena) {
-          console.log(cadena,estados[i][1],i);
           return parseFloat(estados[i][1]);
         }
       }
@@ -852,8 +843,8 @@ border-bottom-right-radius: 15px;
 
     function busqueda_estado_posicion(cadena, posicion) {
       for (var i = 0; i < estados.length; i++) {
-        if (estados[i][0] == cadena) {
-          console.log(cadena);
+        if (estados[i][0] == cadena)
+        {
           return parseFloat(estados[i][posicion]);
         }
       }
@@ -862,7 +853,6 @@ border-bottom-right-radius: 15px;
     function busqueda_anio(cadena) {
       for (var i = 0; i < estados[0].length; i++) {
         if (estados[0][i] == cadena) {
-          console.log(estados[0][i]);
           return i;
         }
       }
@@ -901,24 +891,15 @@ border-bottom-right-radius: 15px;
       return this._div;
     };
 
-console.log('........lll...');
     var res = atributos.Serie[0].CobTemporal_ser;
-    console.log(res);
     anioo = res.split('-');
-    console.log(anioo);
-
     info.update = function (props) {
       
       $('.infos').removeClass('hide');
       $('.info2').removeClass('hide');
       if (props != undefined) {
         this._div.innerHTML = '<div><h5 style="font-weight:bold">' + props.nom_ent + '</h5><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="font-size: 20px;color: #00aeef;">' + busqueda_estado(props.nom_ent).toFixed(2)/*props.density*/ + '</b><br/><b style="padding-left:28px;color:#999999;">(' + anioo[1] + ')</b><p style="position: absolute;bottom: 71%;left: 35%;font-size: 15px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 164px;">'+titulo_des_graf+'</p></div></div><div class="info"></div>';
-        console.log("aca ---> ",estados[busqueda_indice(props.nom_ent)]);
-        // gen(estados[props.cve]);
         gen(estados[busqueda_indice(props.nom_ent)]);
-        console.log("busqueda",busqueda_mexico());
-        console.log("--->>>>>>>",titulo_des_graf);
-        console.log("props",props);
       }
     };
 
@@ -948,8 +929,6 @@ console.log('........lll...');
 
     function style(feature) {
       var res = String(getColoR(busqueda_estado(feature.properties.nom_ent))).split(",");
-      console.log(res, 'hhhh', "c" + res[1]);
-      //console.log("hola->",res[1]);
       return {
         weight: 0.5,
         opacity: 1,
@@ -974,7 +953,6 @@ console.log('........lll...');
         if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
           layer.bringToFront();
         }
-        console.log("over",layer.feature.properties);
         info.update(layer.feature.properties);
       }
     }
@@ -1020,15 +998,13 @@ console.log('........lll...');
     }
 
     function highlightFromLegend(e) {
-      //console.log(e);
+      
       (function ($) {
         $("svg path." + e).addClass("highlighted");
         var r = $("svg path." + e);
         for (var i = 0; i < r.length; i++) {
           r[i].classList.add("highlighted");
-          //console.log(r[i]);
         }
-        //console.log($("svg path."+e));
       } (jQuery));
     }
 
@@ -1040,7 +1016,6 @@ console.log('........lll...');
         for (var i = 0; i < r.length; i++) {
           r[i].classList.remove("highlighted");
         }
-        //console.log(r);
       } (jQuery));
     }
 
@@ -1048,14 +1023,10 @@ console.log('........lll...');
     var values = [];
     var values2 = [];
     for (var i = 0; i < statesData.features.length; i++) {
-      console.log(statesData.features[i].properties.nom_ent);
       if (statesData.features[i].properties.nom_ent == null) continue;
       values.push(busqueda_estado(statesData.features[i].properties.nom_ent));
-      // if (statesData.features[i].properties.density == null) continue;
-      // values2.push(statesData.features[i].properties.density);
     }
 
-    console.log(values, values2);
     brew.setSeries(values);
     brew.setNumClasses(4);
     brew.setColorCode("Reds");
@@ -1081,7 +1052,6 @@ console.log('........lll...');
         from = grades[i];
         to = grades[i + 1];
         var res = String(getColoR(from)).split(",");
-        console.log(from, from + 1, res, grades);
         labels.push(
           '<div style="float:left; text-align: center;"><i class="leyenda" onmouseover="highlightFromLegend(\'c' + res[1] + '\')" onmouseout="clearHighlight();" style="width:100%; background:' + getColoR(from) + '"></i><br>' +
           from.toFixed(2) + (to.toFixed(2) ? '&ndash;' + to.toFixed(2) : '+') + '</div>');
@@ -1130,82 +1100,8 @@ console.log('........lll...');
         }
       }
 
-
-      var stickyNavTop = $('#normal').offset().top;
       var bandera = true;
 
-      var stickyNav = function () {
-        var scrollTop = $(window).scrollTop();
-        if (scrollTop > stickyNavTop) {
-
-          if (bandera) {
-           $('.bullets-container').hide();
-            $('#normal').addClass('sticky');
-
-            
-
-            if (navigator.userAgent.indexOf("Firefox") != -1) {
-              $("#imago img").animate({
-                width: "85px;"
-              }, 1500);
-            }
-            else {
-              $("#imago img").animate({
-                width: "85px;"
-              }, 1500);
-            }
-
-            $('#normal').find('ul').each(function () {
-              $(this).removeClass('nab');
-            });
-            $("#nav-mobile").animate({
-
-              width: "80%"
-            }, 1500);
-
-            $('#normal').find('li').each(function () {
-              $(this).removeClass('tamp');
-            });
-
-            
-
-            bandera = false;
-          }
-        }
-        else {
-          if (!bandera) {
-
-            $("#imago img").animate({
-
-              width: "77px"
-            }, 1500);
-
-            $("#nav-mobile").animate({
-
-              width: "80%"
-            }, 1500);
-            $('.bullets-container').hide();
-
-            $('#normal').removeClass('sticky');
-
-            $('#normal').find('ul').each(function () {
-              $(this).addClass('nab');
-            });
-
-            $('#normal').find('li').each(function () {
-              $(this).addClass('tamp');
-            });
-
-            
-
-            bandera = true;
-          }
-        }
-      };
-      stickyNav();
-      $(window).scroll(function () {
-        stickyNav();
-      });
     });
   </script>
   <script>
@@ -1232,22 +1128,11 @@ console.log('........lll...');
           } catch (ex) {}
       }
 
-
-      $('.tooltip').tooltipster({
-        contentCloning: true,
-        animation: 'fade',
-        delay: 200,
-        theme: 'tooltipster-light',
-        trigger: 'hover',
-        interactive:true
-      });
-
       function deselect(e) {
         $('.pop').slideFadeToggle(function() {
           e.removeClass('selected');
         });
       }
-
 
       if(!!('ontouchstart' in window)){//check for touch device
         $('#contact').unbind('click mouseenter mouseleave'); //use off if you used on, to unbind usual listeners
