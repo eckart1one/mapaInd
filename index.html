@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tasa de Homicidios en México</title>
-  />
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,800,300,600italic,600" rel="stylesheet" type="text/css">
@@ -608,6 +608,20 @@ border-bottom-right-radius: 15px;
       console.log(atributos);
     }
   
+
+    //redefinicion de atributos
+    atributos =
+      {
+      "DescripInd_des": "Cambiamos el titulo de esto",
+      "Serie": [
+        {
+          "CobTemporal_ser": "1990-2016",
+        }
+      ],
+    };
+
+
+
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
@@ -663,21 +677,8 @@ border-bottom-right-radius: 15px;
         }
       );
 
+      titulo_des_graf = atributos.DescripInd_des;
 
-      var titulo   =  '<h4>'+ atributos.DescripInd_des  +'</h4>' +
-                      '<li class="divider"></li> ' +
-                      '<p> '+ atributos.Serie[0].CobTemporal_ser +' </p>' +
-                      '<span> '+ atributos.Serie[0].Descrip_uni +'</span>';
-
-      titulo_des_graf=atributos.DescripInd_des;
-
-      var pie  =((atributos.Serie[0].Descrip_not != null || atributos.Serie[0].Descrip_not != "") ? '':'<div><strong>Nota:</strong> '+ atributos.Serie[0].Descrip_not)+
-                ' <div><strong>Fuente:</strong> '+ atributos.Serie[0].Descrip_fue +' </div>'+
-                ' <div><strong>Fecha de actualización:</strong> '+ atributos.FecProxAct_cal +'</div>'+
-                ' </div>';
-
-      $('.pie_cuadro2').html(pie);
-      $('.cuadro_titulo').html(titulo);
       $('#loader').delay(2000).fadeOut("slow");
     });
 
@@ -893,6 +894,8 @@ border-bottom-right-radius: 15px;
 
     var res = atributos.Serie[0].CobTemporal_ser;
     anioo = res.split('-');
+
+
     info.update = function (props) {
       
       $('.infos').removeClass('hide');
